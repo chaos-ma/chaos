@@ -18,6 +18,7 @@ type ServiceDiscovery interface {
 	Watch(ctx context.Context, serviceName string) (ServiceWatcher, error)          //
 }
 
+// ServiceWatcher 服务监听接口
 type ServiceWatcher interface {
 	Next([]*ServiceInstance, error) //获取服务实例 1.服务实例不为空，返回实例。2.服务实例发生变化，返回实例。3.如果都不满足，则阻塞context deadline
 	Stop() error                    //放弃监听

@@ -5,7 +5,6 @@ package app
  */
 
 import (
-	"chaos/registry"
 	"context"
 	"github.com/google/uuid"
 	"os"
@@ -13,6 +12,8 @@ import (
 	"sync"
 	"syscall"
 	"time"
+
+	"chaos/registry"
 )
 
 type App struct {

@@ -6,10 +6,11 @@ package app
  */
 
 import (
-	"chaos/registry"
 	"net/url"
 	"os"
 	"time"
+
+	"chaos/registry"
 )
 
 type Option func(o *serviceOptions)
