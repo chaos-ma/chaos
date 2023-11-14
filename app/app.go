@@ -6,12 +6,13 @@ package app
 
 import (
 	"context"
-	"github.com/google/uuid"
 	"os"
 	"os/signal"
 	"sync"
 	"syscall"
 	"time"
+
+	"github.com/google/uuid"
 
 	"chaos/registry"
 )
