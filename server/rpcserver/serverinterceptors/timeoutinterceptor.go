@@ -6,6 +6,7 @@ package serverinterceptors
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"runtime/debug"
 	"strings"
@@ -17,7 +18,6 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// UnaryTimeoutInterceptor returns a func that sets timeout to incoming unary requests.
 func UnaryTimeoutInterceptor(timeout time.Duration) grpc.UnaryServerInterceptor {
 	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo,
 		handler grpc.UnaryHandler) (interface{}, error) {
@@ -53,10 +53,9 @@ func UnaryTimeoutInterceptor(timeout time.Duration) grpc.UnaryServerInterceptor 
 			return resp, err
 		case <-ctx.Done():
 			err := ctx.Err()
-			if err == context.Canceled {
-				//我们之前说过我们把error统一了， grpc的error我们也可以统一, 自己完成
+			if errors.Is(err, context.Canceled) {
 				err = status.Error(codes.Canceled, err.Error())
-			} else if err == context.DeadlineExceeded {
+			} else if errors.Is(err, context.DeadlineExceeded) {
 				err = status.Error(codes.DeadlineExceeded, err.Error())
 			}
 			return nil, err
