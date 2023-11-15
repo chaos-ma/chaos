@@ -657,18 +657,18 @@ func appendField(attrs []attribute.KeyValue, f zapcore.Field) []attribute.KeyVal
 		}
 		err := f.Interface.(zapcore.ArrayMarshaler).MarshalLogArray(arrayEncoder)
 		if err != nil {
-			attr = attribute.String(f.Key+"_error", fmt.Sprintf("otelzap: unable to marshal array: %v", err))
+			attr = attribute.String(f.Key+"_error", fmt.Sprintf("loggers: unable to marshal array: %v", err))
 		} else {
 			attr = attribute.StringSlice(f.Key, arrayEncoder.stringsSlice)
 		}
 		return append(attrs, attr)
 
 	case zapcore.ObjectMarshalerType:
-		attr := attribute.String(f.Key+"_error", "otelzap: zapcore.ObjectMarshalerType is not implemented")
+		attr := attribute.String(f.Key+"_error", "loggers: zapcore.ObjectMarshalerType 没有实现")
 		return append(attrs, attr)
 
 	default:
-		attr := attribute.String(f.Key+"_error", fmt.Sprintf("otelzap: unknown field type: %v", f))
+		attr := attribute.String(f.Key+"_error", fmt.Sprintf("loggers: unknown field type: %v", f))
 		return append(attrs, attr)
 	}
 }

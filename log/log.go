@@ -13,15 +13,6 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-type LogHelper interface {
-	Info(msg string, fields ...Field)
-	InfoFmt(format string, v ...interface{})
-	Warn(msg string, fields ...Field)
-	WarnFmt(format string, v ...interface{})
-	Error(msg string, fields ...Field)
-	Errorf(format string, v ...interface{})
-}
-
 func Init(opts *Options) {
 	lock.Lock()
 	defer lock.Unlock()
@@ -38,7 +29,6 @@ func New(opts *Options) *Logger {
 		zapLevel = zapcore.InfoLevel
 	}
 	encodeLevel := zapcore.CapitalLevelEncoder
-	// when output to local path, with color is forbidden
 	if opts.Format == FormatConsole && opts.EnableColor {
 		encodeLevel = zapcore.CapitalColorLevelEncoder
 	}
@@ -79,10 +69,8 @@ func New(opts *Options) *Logger {
 	}
 	logger := &Logger{
 		Logger: l,
-
 		//有时我们稍微封装了一下记录日志的方法，但是我们希望输出的文件名和行号是调用封装函数的位置。这时可以使用zap.AddCallerSkip(skip int)向上跳 1 层：
-		skipCaller: l.WithOptions(zap.AddCallerSkip(1)),
-
+		skipCaller:       l.WithOptions(zap.AddCallerSkip(1)),
 		minLevel:         zapLevel,
 		errorStatusLevel: zap.ErrorLevel,
 		caller:           true,
