@@ -1,10 +1,15 @@
 # Chaos云原生微服务框架
 
-## 1. grpc安装
+## 1. grpc
+
+1. 安装protobuf：https://github.com/protocolbuffers/protobuf/releases
+2. 安装protoc-gen-go
 
 ```
-
+go install github.com/golang/protobuf/protoc-gen-go@latest
 ```
+
+
 
 ## 2. 模块
 
@@ -35,3 +40,5 @@ Interceptor借鉴go-zero的实现
 ```
 
 ### 2.6 utils
+
+### 2.7 third_party

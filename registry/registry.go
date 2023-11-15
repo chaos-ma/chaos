@@ -28,6 +28,6 @@ type ServiceInstance struct {
 	ID        string   `json:"id"`        //注册中心的id
 	Name      string   `json:"name"`      //注册中心name
 	Version   string   `json:"version"`   //服务版本
-	Endpoints []string `json:"endpoints"` //服务的地址
+	Endpoints []string `json:"endpoints"` //服务的地址 e.g：http://127.0.0.1:8000 grpc://127.0.0.1:9000
 	Metadata  []string `json:"metadata"`  //服务元数据
 }
