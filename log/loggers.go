@@ -15,14 +15,13 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/uptrace/opentelemetry-go-extra/otelutil"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/codes"
 	semconv "go.opentelemetry.io/otel/semconv/v1.10.0"
 	"go.opentelemetry.io/otel/trace"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-
-	"github.com/uptrace/opentelemetry-go-extra/otelutil"
 )
 
 const numAttr = 5
