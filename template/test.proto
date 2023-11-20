@@ -6,7 +6,7 @@ package template;
 
 import "google/api/annotations.proto";
 
-option go_package="./;template";
+option go_package = "./;test";
 
 // The greeting service definition.
 service Greeter {
