@@ -66,5 +66,7 @@ _testmain.go
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
+template/test/*.go
+
 # 不忽略cmd
 !template/protoc-gen-gin.exe
