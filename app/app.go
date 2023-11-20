@@ -18,14 +18,14 @@ import (
 )
 
 type App struct {
-	opts     serviceOptions
+	opts     options
 	instance *registry.ServiceInstance
 	lock     sync.Mutex //保证获取instance的时候是线程安全
 }
 
 func NewApp(opts ...Option) *App {
 	//设置默认值
-	o := serviceOptions{
+	o := options{
 		signals:           []os.Signal{syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGINT},
 		registerTimeout:   10 * time.Second,
 		unRegisterTimeout: 10 * time.Second,
@@ -77,7 +77,7 @@ func (app *App) Stop() error {
 		//设置超时时间
 		regCtx, regCancel := context.WithTimeout(context.Background(), app.opts.unRegisterTimeout)
 		defer regCancel()
-		err := app.opts.registry.UnRegister(regCtx, instance)
+		err := app.opts.registry.Deregister(regCtx, instance)
 		if err != nil {
 			// TODO 打印日志信息
 			return err
