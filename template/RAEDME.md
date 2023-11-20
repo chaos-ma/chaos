@@ -12,6 +12,6 @@ go build -o protoc-gen-gin.exe
 * protoc命令
 
 ```shell
-protoc --proto_path=. --proto_path=../third_party --go_out=./v1 --go-grpc_out=./v1 --gin_out=./v1 test.proto
+protoc --proto_path=. --proto_path=../third_party --go_out=./test --go-grpc_out=./test --gin_out=./test test.proto
 ```
 
