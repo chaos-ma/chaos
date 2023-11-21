@@ -2,6 +2,7 @@ package middlewares
 
 /**
 * created by mengqi on 2023/11/21
+* 这里使用策略模式， 通过设置不同的策略， 可以实现不同的鉴权方式
  */
 
 import (

@@ -13,6 +13,15 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
+type LogHelper interface {
+	Info(msg string, fields ...Field)
+	Infof(format string, v ...interface{})
+	Warn(msg string, fields ...Field)
+	Warnf(format string, v ...interface{})
+	Error(msg string, fields ...Field)
+	Errorf(format string, v ...interface{})
+}
+
 func Init(opts *Options) {
 	lock.Lock()
 	defer lock.Unlock()

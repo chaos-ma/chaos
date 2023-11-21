@@ -35,19 +35,20 @@ func NewJWT(signKey string) *JWT {
 	}
 }
 
-// 创建一个token
+// CreateToken 创建一个token
 func (j *JWT) CreateToken(claims CustomClaims) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return token.SignedString(j.SigningKey)
 }
 
-// 解析 token
+// ParseToken 解析 token
 func (j *JWT) ParseToken(tokenString string) (*CustomClaims, error) {
 	token, err := jwt.ParseWithClaims(tokenString, &CustomClaims{}, func(token *jwt.Token) (i interface{}, e error) {
 		return j.SigningKey, nil
 	})
 	if err != nil {
-		if ve, ok := err.(*jwt.ValidationError); ok {
+		var ve *jwt.ValidationError
+		if errors.As(err, &ve) {
 			if ve.Errors&jwt.ValidationErrorMalformed != 0 {
 				return nil, TokenMalformed
 			} else if ve.Errors&jwt.ValidationErrorExpired != 0 {
@@ -73,7 +74,7 @@ func (j *JWT) ParseToken(tokenString string) (*CustomClaims, error) {
 
 }
 
-// 更新token
+// RefreshToken 更新token
 func (j *JWT) RefreshToken(tokenString string) (string, error) {
 	jwt.TimeFunc = func() time.Time {
 		return time.Unix(0, 0)
