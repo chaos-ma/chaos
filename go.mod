@@ -17,7 +17,6 @@ require (
 	github.com/nacos-group/nacos-sdk-go v1.1.4
 	github.com/novalagung/gubrak v1.0.0
 	github.com/penglongli/gin-metrics v0.1.10
-	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.12.0
 	github.com/uptrace/opentelemetry-go-extra/otelutil v0.2.3
 	go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin v0.46.1
@@ -87,6 +86,7 @@ require (
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/openzipkin/zipkin-go v0.4.2 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.8 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/prometheus/client_model v0.2.0 // indirect
 	github.com/prometheus/common v0.32.1 // indirect
 	github.com/prometheus/procfs v0.7.3 // indirect

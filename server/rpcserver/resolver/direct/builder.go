@@ -13,17 +13,17 @@ func init() {
 	resolver.Register(NewBuilder())
 }
 
-type directBuilder struct{}
+type DirectBuilder struct{}
 
 // NewBuilder creates a directBuilder which is used to factory direct resolvers.
 // example:
 //
 //	direct://<authority>/127.0.0.1:9000,
-func NewBuilder() *directBuilder {
-	return &directBuilder{}
+func NewBuilder() *DirectBuilder {
+	return &DirectBuilder{}
 }
 
-func (d *directBuilder) Build(target resolver.Target, cc resolver.ClientConn, opts resolver.BuildOptions) (resolver.Resolver, error) {
+func (d *DirectBuilder) Build(target resolver.Target, cc resolver.ClientConn, opts resolver.BuildOptions) (resolver.Resolver, error) {
 	addrs := make([]resolver.Address, 0)
 	for _, addr := range strings.Split(strings.TrimPrefix(target.URL.Path, "/"), ",") {
 		addrs = append(addrs, resolver.Address{Addr: addr})
@@ -37,8 +37,8 @@ func (d *directBuilder) Build(target resolver.Target, cc resolver.ClientConn, op
 	return newDirectResolver(), nil
 }
 
-func (d *directBuilder) Scheme() string {
+func (d *DirectBuilder) Scheme() string {
 	return "direct"
 }
 
-var _ resolver.Builder = &directBuilder{}
+var _ resolver.Builder = &DirectBuilder{}

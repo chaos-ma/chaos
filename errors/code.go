@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	unknownCoder defaultCoder = defaultCoder{1, http.StatusInternalServerError, "An internal server error occurred", "http://imooc/mxshop/pkg/errors/README.md"}
+	unknownCoder defaultCoder = defaultCoder{1, http.StatusInternalServerError, "An internal server error occurred", ""}
 )
 
 // Coder defines an interface for an error code detail information.
@@ -70,11 +70,11 @@ func (coder defaultCoder) Reference() string {
 var codes = map[int]Coder{}
 var codeMux = &sync.Mutex{}
 
-// Register register a user define error code.
-// It will overrid the exist code.
+// Register a user define error code.
+// It will override the exist code.
 func Register(coder Coder) {
 	if coder.Code() == 0 {
-		panic("code `0` is reserved by `imooc/mxshop/pkg/errors` as unknownCode error code")
+		panic("code `0` is reserved by as unknownCode error code")
 	}
 
 	codeMux.Lock()
@@ -87,7 +87,7 @@ func Register(coder Coder) {
 // It will panic when the same Code already exist.
 func MustRegister(coder Coder) {
 	if coder.Code() == 0 {
-		panic("code '0' is reserved by 'imooc/mxshop/pkg/errors' as ErrUnknown error code")
+		panic("code '0' is reserved by as ErrUnknown error code")
 	}
 
 	codeMux.Lock()

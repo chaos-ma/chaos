@@ -4,7 +4,7 @@
 
 package code
 
-// init register error codes defines in this source code to `imooc/mxshop/pkg/errors`
+// init register error codes defines in this source code to
 func init() {
 	register(ErrDatabase, 500, "Database error")
 	register(ErrEncrypt, 401, "Error occurred while encrypting the user password")
