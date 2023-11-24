@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	jwt "github.com/dgrijalva/jwt-go/v4"
+	"github.com/dgrijalva/jwt-go/v4"
 	"github.com/gin-gonic/gin"
 
 	"chaos/code"
