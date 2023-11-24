@@ -4,8 +4,8 @@ import (
 	"context"
 	"sync"
 
-	selector2 "chaos/server/rpcserver/selector"
-	"chaos/server/rpcserver/selector/node/direct"
+	selector2 "github.com/chaos-ma/chaos/server/rpcserver/selector"
+	"github.com/chaos-ma/chaos/server/rpcserver/selector/node/direct"
 )
 
 const (

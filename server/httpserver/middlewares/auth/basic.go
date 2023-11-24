@@ -6,10 +6,10 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"chaos/code"
-	"chaos/common/core"
-	"chaos/errors"
-	"chaos/server/httpserver/middlewares"
+	"github.com/chaos-ma/chaos/code"
+	"github.com/chaos-ma/chaos/common/core"
+	"github.com/chaos-ma/chaos/errors"
+	"github.com/chaos-ma/chaos/server/httpserver/middlewares"
 )
 
 // BasicStrategy defines Basic authentication strategy.

@@ -3,7 +3,7 @@ package selector
 import (
 	"context"
 
-	"chaos/errors"
+	"github.com/chaos-ma/chaos/errors"
 )
 
 // ErrNoAvailable is no available node.

@@ -25,7 +25,7 @@ import (
 	listerv1 "k8s.io/client-go/listers/core/v1"
 	"k8s.io/client-go/tools/cache"
 
-	"chaos/registry"
+	"github.com/chaos-ma/chaos/registry"
 )
 
 // Defines the key name of specific fields

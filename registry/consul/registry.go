@@ -13,7 +13,7 @@ import (
 
 	"github.com/hashicorp/consul/api"
 
-	"chaos/registry"
+	"github.com/chaos-ma/chaos/registry"
 )
 
 var (

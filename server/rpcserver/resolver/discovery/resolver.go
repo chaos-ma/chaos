@@ -16,8 +16,8 @@ import (
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/resolver"
 
-	"chaos/log"
-	"chaos/registry"
+	"github.com/chaos-ma/chaos/log"
+	"github.com/chaos-ma/chaos/registry"
 )
 
 type discoveryResolver struct {

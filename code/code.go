@@ -5,7 +5,7 @@ import (
 
 	"github.com/novalagung/gubrak"
 
-	"chaos/errors"
+	"github.com/chaos-ma/chaos/errors"
 )
 
 type ErrCode struct {

@@ -6,7 +6,7 @@ package consul
 import (
 	"context"
 
-	"chaos/registry"
+	"github.com/chaos-ma/chaos/registry"
 )
 
 type watcher struct {

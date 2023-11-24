@@ -8,7 +8,7 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"chaos/registry"
+	"github.com/chaos-ma/chaos/registry"
 )
 
 type serviceSet struct {

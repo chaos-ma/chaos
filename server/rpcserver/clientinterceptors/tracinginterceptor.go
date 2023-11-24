@@ -14,7 +14,7 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
-	trace2 "chaos/core/trace"
+	trace2 "github.com/chaos-ma/chaos/core/trace"
 )
 
 const (

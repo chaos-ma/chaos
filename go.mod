@@ -1,4 +1,4 @@
-module chaos
+module github.com/chaos-ma/chaos
 
 go 1.19
 

@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"chaos/errors"
+	"github.com/chaos-ma/chaos/errors"
 )
 
 // ErrResponse defines the return messages when an error occurred.
