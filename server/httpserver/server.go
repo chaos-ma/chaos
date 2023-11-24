@@ -15,10 +15,10 @@ import (
 	ut "github.com/go-playground/universal-translator"
 	"github.com/penglongli/gin-metrics/ginmetrics"
 
-	"chaos/log"
-	mws "chaos/server/httpserver/middlewares"
-	"chaos/server/httpserver/pprof"
-	"chaos/server/httpserver/validation"
+	"github.com/chaos-ma/chaos/log"
+	mws "github.com/chaos-ma/chaos/server/httpserver/middlewares"
+	"github.com/chaos-ma/chaos/server/httpserver/pprof"
+	"github.com/chaos-ma/chaos/server/httpserver/validation"
 )
 
 type JwtInfo struct {

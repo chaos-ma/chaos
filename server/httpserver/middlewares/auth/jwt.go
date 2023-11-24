@@ -4,7 +4,7 @@ import (
 	ginjwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
 
-	"chaos/server/httpserver/middlewares"
+	"github.com/chaos-ma/chaos/server/httpserver/middlewares"
 )
 
 // AuthzAudience defines the value of jwt audience field.

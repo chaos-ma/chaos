@@ -15,8 +15,8 @@ import (
 
 	"github.com/hashicorp/consul/api"
 
-	"chaos/log"
-	"chaos/registry"
+	"github.com/chaos-ma/chaos/log"
+	"github.com/chaos-ma/chaos/registry"
 )
 
 // Client is consul client config

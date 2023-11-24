@@ -8,7 +8,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	selector2 "chaos/server/rpcserver/selector"
+	selector2 "github.com/chaos-ma/chaos/server/rpcserver/selector"
 	"github.com/go-kratos/kratos/v2/errors"
 )
 

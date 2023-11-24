@@ -12,10 +12,10 @@ import (
 	"google.golang.org/grpc"
 	grpcinsecure "google.golang.org/grpc/credentials/insecure"
 
-	"chaos/log"
-	"chaos/registry"
-	"chaos/server/rpcserver/clientinterceptors"
-	"chaos/server/rpcserver/resolver/discovery"
+	"github.com/chaos-ma/chaos/log"
+	"github.com/chaos-ma/chaos/registry"
+	"github.com/chaos-ma/chaos/server/rpcserver/clientinterceptors"
+	"github.com/chaos-ma/chaos/server/rpcserver/resolver/discovery"
 )
 
 type ClientOption func(o *clientOptions)

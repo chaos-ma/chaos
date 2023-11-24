@@ -9,7 +9,7 @@ import (
 	"google.golang.org/grpc"
 	"runtime/debug"
 
-	"chaos/log"
+	"github.com/chaos-ma/chaos/log"
 )
 
 func StreamCrashInterceptor(svr interface{}, stream grpc.ServerStream, _ *grpc.StreamServerInfo,

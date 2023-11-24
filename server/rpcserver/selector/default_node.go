@@ -3,7 +3,7 @@ package selector
 import (
 	"strconv"
 
-	"chaos/registry"
+	"github.com/chaos-ma/chaos/registry"
 )
 
 // DefaultNode is selector node

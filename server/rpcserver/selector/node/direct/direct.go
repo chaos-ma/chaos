@@ -5,7 +5,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	selector2 "chaos/server/rpcserver/selector"
+	selector2 "github.com/chaos-ma/chaos/server/rpcserver/selector"
 )
 
 const (

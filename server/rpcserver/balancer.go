@@ -9,8 +9,8 @@ import (
 	"google.golang.org/grpc/balancer/base"
 	"google.golang.org/grpc/metadata"
 
-	"chaos/registry"
-	"chaos/server/rpcserver/selector"
+	"github.com/chaos-ma/chaos/registry"
+	"github.com/chaos-ma/chaos/server/rpcserver/selector"
 )
 
 const (

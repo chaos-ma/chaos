@@ -12,7 +12,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"
 
-	"chaos/core/metric"
+	"github.com/chaos-ma/chaos/core/metric"
 )
 
 const serverNamespace = "rpc_client"

@@ -10,7 +10,7 @@ import (
 	"os"
 	"time"
 
-	"chaos/registry"
+	"github.com/chaos-ma/chaos/registry"
 )
 
 type Option func(o *options)

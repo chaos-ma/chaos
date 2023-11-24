@@ -5,7 +5,7 @@ import (
 	"google.golang.org/protobuf/compiler/protogen"
 	"google.golang.org/protobuf/types/pluginpb"
 
-	"chaos/template/generator"
+	"github.com/chaos-ma/chaos/template/generator"
 )
 
 func main() {

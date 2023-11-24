@@ -1,10 +1,9 @@
-module chaos
+module github.com/chaos-ma/chaos
 
 go 1.19
 
 require (
 	github.com/appleboy/gin-jwt/v2 v2.9.1
-	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/dgrijalva/jwt-go/v4 v4.0.0-preview1
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-kratos/kratos/v2 v2.7.1

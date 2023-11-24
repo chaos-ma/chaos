@@ -12,7 +12,7 @@ import (
 
 	"google.golang.org/grpc/resolver"
 
-	"chaos/registry"
+	"github.com/chaos-ma/chaos/registry"
 )
 
 const name = "discovery"

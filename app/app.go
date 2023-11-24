@@ -14,7 +14,7 @@ import (
 
 	"github.com/google/uuid"
 
-	"chaos/registry"
+	"github.com/chaos-ma/chaos/registry"
 )
 
 type App struct {

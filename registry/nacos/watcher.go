@@ -12,7 +12,7 @@ import (
 	"github.com/nacos-group/nacos-sdk-go/model"
 	"github.com/nacos-group/nacos-sdk-go/vo"
 
-	"chaos/registry"
+	"github.com/chaos-ma/chaos/registry"
 )
 
 var _ registry.Watcher = (*watcher)(nil)

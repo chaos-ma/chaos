@@ -8,7 +8,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/dgrijalva/jwt-go"
+	"github.com/dgrijalva/jwt-go/v4"
 )
 
 type CustomClaims struct {
@@ -23,10 +23,10 @@ type JWT struct {
 }
 
 var (
-	TokenExpired     = errors.New("Token is expired")
-	TokenNotValidYet = errors.New("Token not active yet")
-	TokenMalformed   = errors.New("That's not even a token")
-	TokenInvalid     = errors.New("Couldn't handle this token:")
+	TokenExpired     = errors.New("token is expired")
+	TokenNotValidYet = errors.New("token not active yet")
+	TokenMalformed   = errors.New("that's not even a token")
+	TokenInvalid     = errors.New("couldn't handle this token")
 )
 
 func NewJWT(signKey string) *JWT {
@@ -47,18 +47,17 @@ func (j *JWT) ParseToken(tokenString string) (*CustomClaims, error) {
 		return j.SigningKey, nil
 	})
 	if err != nil {
-		var ve *jwt.ValidationError
-		if errors.As(err, &ve) {
-			if ve.Errors&jwt.ValidationErrorMalformed != 0 {
-				return nil, TokenMalformed
-			} else if ve.Errors&jwt.ValidationErrorExpired != 0 {
-				// Token is expired
-				return nil, TokenExpired
-			} else if ve.Errors&jwt.ValidationErrorNotValidYet != 0 {
-				return nil, TokenNotValidYet
-			} else {
-				return nil, TokenInvalid
-			}
+		var expErr *jwt.TokenExpiredError
+		var nbfErr *jwt.TokenNotValidYetError
+		var fmtErr *jwt.MalformedTokenError
+		if errors.As(err, &fmtErr) {
+			return nil, TokenMalformed
+		} else if errors.As(err, &expErr) {
+			return nil, TokenExpired
+		} else if errors.As(err, &nbfErr) {
+			return nil, TokenNotValidYet
+		} else {
+			return nil, TokenInvalid
 		}
 	}
 	if token != nil {
@@ -87,7 +86,7 @@ func (j *JWT) RefreshToken(tokenString string) (string, error) {
 	}
 	if claims, ok := token.Claims.(*CustomClaims); ok && token.Valid {
 		jwt.TimeFunc = time.Now
-		claims.StandardClaims.ExpiresAt = time.Now().Add(1 * time.Hour).Unix()
+		claims.StandardClaims.ExpiresAt = jwt.At(time.Now().Add(1 * time.Hour))
 		return j.CreateToken(*claims)
 	}
 	return "", TokenInvalid

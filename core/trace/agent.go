@@ -14,7 +14,7 @@ import (
 	semconv "go.opentelemetry.io/otel/semconv/v1.12.0"
 	"sync"
 
-	"chaos/log"
+	"github.com/chaos-ma/chaos/log"
 )
 
 /*

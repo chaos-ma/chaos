@@ -16,10 +16,10 @@ import (
 	"google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/grpc/reflection"
 
-	"chaos/log"
-	apiMetaData "chaos/metadata"
-	serverInterceptors "chaos/server/rpcserver/serverinterceptors"
-	"chaos/utils/host"
+	"github.com/chaos-ma/chaos/log"
+	apiMetaData "github.com/chaos-ma/chaos/metadata"
+	serverInterceptors "github.com/chaos-ma/chaos/server/rpcserver/serverinterceptors"
+	"github.com/chaos-ma/chaos/utils/host"
 )
 
 type ServerOption func(o *RpcServer)
