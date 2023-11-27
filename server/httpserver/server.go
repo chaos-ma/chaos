@@ -32,7 +32,7 @@ type JwtInfo struct {
 	MaxRefresh time.Duration
 }
 
-// Server wrapper for gin.Engine
+// wrapper for gin.Engine
 type Server struct {
 	*gin.Engine
 
@@ -80,7 +80,7 @@ func NewServer(opts ...ServerOption) *Server {
 		},
 		Engine:      gin.Default(),
 		transName:   "zh",
-		serviceName: "chaos",
+		serviceName: "gmicro",
 	}
 
 	for _, o := range opts {
@@ -107,7 +107,7 @@ func (s *Server) Translator() ut.Translator {
 	return s.trans
 }
 
-// Start http server
+// start rest server
 func (s *Server) Start(ctx context.Context) error {
 	//设置开发模式，打印路由信息
 	if s.mode != gin.DebugMode && s.mode != gin.ReleaseMode && s.mode != gin.TestMode {
@@ -147,14 +147,14 @@ func (s *Server) Start(ctx context.Context) error {
 		m.Use(s)
 	}
 
-	log.Infof("http server is running on port: %d", s.port)
+	log.Infof("rest server is running on port: %d", s.port)
 	address := fmt.Sprintf(":%d", s.port)
 	s.server = &http.Server{
 		Addr:    address,
 		Handler: s.Engine,
 	}
 	_ = s.SetTrustedProxies(nil)
-	if err = s.server.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
+	if err = s.server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		return err
 	}
 	return nil

@@ -17,29 +17,40 @@ import (
 	"google.golang.org/grpc/reflection"
 
 	"github.com/chaos-ma/chaos/log"
-	apiMetaData "github.com/chaos-ma/chaos/metadata"
-	serverInterceptors "github.com/chaos-ma/chaos/server/rpcserver/serverinterceptors"
+	apimd "github.com/chaos-ma/chaos/metadata"
+	srvintc "github.com/chaos-ma/chaos/server/rpcserver/serverinterceptors"
 	"github.com/chaos-ma/chaos/utils/host"
 )
 
-type ServerOption func(o *RpcServer)
+type ServerOption func(o *Server)
 
-type RpcServer struct {
+type Server struct {
 	*grpc.Server
-	address            string
-	unaryInterceptors  []grpc.UnaryServerInterceptor
-	streamInterceptors []grpc.StreamServerInterceptor
-	grpcOpts           []grpc.ServerOption
-	listener           net.Listener
-	health             *health.Server
-	endpoint           *url.URL
-	metadata           *apiMetaData.Server
-	timeout            time.Duration
-	enableMetrics      bool
+
+	address    string
+	unaryInts  []grpc.UnaryServerInterceptor
+	streamInts []grpc.StreamServerInterceptor
+	grpcOpts   []grpc.ServerOption
+	lis        net.Listener
+	timeout    time.Duration
+
+	health   *health.Server
+	metadata *apimd.Server
+	endpoint *url.URL
+
+	enableMetrics bool
 }
 
-func NewServer(opts ...ServerOption) *RpcServer {
-	srv := &RpcServer{
+func (s *Server) Endpoint() *url.URL {
+	return s.endpoint
+}
+
+func (s *Server) Address() string {
+	return s.address
+}
+
+func NewServer(opts ...ServerOption) *Server {
+	srv := &Server{
 		address: ":0",
 		health:  health.NewServer(),
 		//timeout: 1 * time.Second,
@@ -48,30 +59,30 @@ func NewServer(opts ...ServerOption) *RpcServer {
 	for _, o := range opts {
 		o(srv)
 	}
-	// 默认拦截器crash，tracing
-	unaryInterceptors := []grpc.UnaryServerInterceptor{
-		serverInterceptors.UnaryCrashInterceptor,
+
+	//TODO 我们现在希望用户不设置拦截器的情况下，我们会自动默认加上一些必须的拦截器， crash，tracing
+	unaryInts := []grpc.UnaryServerInterceptor{
+		srvintc.UnaryCrashInterceptor,
 		otelgrpc.UnaryServerInterceptor(),
 	}
+	grpc.StatsHandler(otelgrpc.NewServerHandler())
 
-	//加入监控拦截器
 	if srv.enableMetrics {
-		unaryInterceptors = append(unaryInterceptors, serverInterceptors.UnaryPrometheusInterceptor)
+		unaryInts = append(unaryInts, srvintc.UnaryPrometheusInterceptor)
 	}
 
-	//加入超时拦截器
 	if srv.timeout > 0 {
-		unaryInterceptors = append(unaryInterceptors, serverInterceptors.UnaryTimeoutInterceptor(srv.timeout))
+		unaryInts = append(unaryInts, srvintc.UnaryTimeoutInterceptor(srv.timeout))
 	}
 
-	if len(srv.unaryInterceptors) > 0 {
-		unaryInterceptors = append(unaryInterceptors, srv.unaryInterceptors...)
+	if len(srv.unaryInts) > 0 {
+		unaryInts = append(unaryInts, srv.unaryInts...)
 	}
 
-	//传入的拦截器转换成grpc的ServerOption
-	grpcOpts := []grpc.ServerOption{grpc.ChainUnaryInterceptor(unaryInterceptors...)}
+	//把我们传入的拦截器转换成grpc的ServerOption
+	grpcOpts := []grpc.ServerOption{grpc.ChainUnaryInterceptor(unaryInts...)}
 
-	//把自定义的grpc.ServerOption放在一起
+	//把用户自己传入的grpc.ServerOption放在一起
 	if len(srv.grpcOpts) > 0 {
 		grpcOpts = append(grpcOpts, srv.grpcOpts...)
 	}
@@ -79,7 +90,7 @@ func NewServer(opts ...ServerOption) *RpcServer {
 	srv.Server = grpc.NewServer(grpcOpts...)
 
 	//注册metadata的Server
-	srv.metadata = apiMetaData.NewServer(srv.Server)
+	srv.metadata = apimd.NewServer(srv.Server)
 
 	//解析address
 	err := srv.listenAndEndpoint()
@@ -87,9 +98,9 @@ func NewServer(opts ...ServerOption) *RpcServer {
 		panic(err)
 	}
 
-	//健康检查
+	//注册health
 	grpc_health_v1.RegisterHealthServer(srv.Server, srv.health)
-	apiMetaData.RegisterMetadataServer(srv.Server, srv.metadata)
+	apimd.RegisterMetadataServer(srv.Server, srv.metadata)
 	reflection.Register(srv.Server)
 	//可以支持用户直接通过grpc的一个接口查看当前支持的所有的rpc服务
 
@@ -97,53 +108,59 @@ func NewServer(opts ...ServerOption) *RpcServer {
 }
 
 func WithAddress(address string) ServerOption {
-	return func(s *RpcServer) {
+	return func(s *Server) {
 		s.address = address
 	}
 }
 
-func WithListener(listener net.Listener) ServerOption {
-	return func(s *RpcServer) {
-		s.listener = listener
-	}
-}
-
-func WithUnaryInterceptors(interceptors ...grpc.UnaryServerInterceptor) ServerOption {
-	return func(s *RpcServer) {
-		s.unaryInterceptors = interceptors
-	}
-}
-
-func WithStreamInterceptors(interceptors ...grpc.StreamServerInterceptor) ServerOption {
-	return func(s *RpcServer) {
-		s.streamInterceptors = interceptors
-	}
-}
-
-func WithGrpcOpts(opts ...grpc.ServerOption) ServerOption {
-	return func(s *RpcServer) {
-		s.grpcOpts = opts
+func WithMetrics(metric bool) ServerOption {
+	return func(s *Server) {
+		s.enableMetrics = metric
 	}
 }
 
 func WithTimeout(timeout time.Duration) ServerOption {
-	return func(s *RpcServer) {
+	return func(s *Server) {
 		s.timeout = timeout
 	}
 }
 
-// ip和端口的提取
-func (s *RpcServer) listenAndEndpoint() error {
-	if s.listener == nil {
+func WithLis(lis net.Listener) ServerOption {
+	return func(s *Server) {
+		s.lis = lis
+	}
+}
+
+func WithUnaryInterceptor(in ...grpc.UnaryServerInterceptor) ServerOption {
+	return func(s *Server) {
+		s.unaryInts = in
+	}
+}
+
+func WithStreamInterceptor(in ...grpc.StreamServerInterceptor) ServerOption {
+	return func(s *Server) {
+		s.streamInts = in
+	}
+}
+
+func WithOptions(opts ...grpc.ServerOption) ServerOption {
+	return func(s *Server) {
+		s.grpcOpts = opts
+	}
+}
+
+// 完成ip和端口的提取
+func (s *Server) listenAndEndpoint() error {
+	if s.lis == nil {
 		lis, err := net.Listen("tcp", s.address)
 		if err != nil {
 			return err
 		}
-		s.listener = lis
+		s.lis = lis
 	}
-	addr, err := host.Extract(s.address, s.listener)
+	addr, err := host.Extract(s.address, s.lis)
 	if err != nil {
-		_ = s.listener.Close()
+		_ = s.lis.Close()
 		return err
 	}
 	s.endpoint = &url.URL{Scheme: "grpc", Host: addr}
@@ -151,13 +168,13 @@ func (s *RpcServer) listenAndEndpoint() error {
 }
 
 // Start 启动grpc的服务
-func (s *RpcServer) Start(ctx context.Context) error {
-	log.Infof("[grpc] server listening on: %s", s.listener.Addr().String())
+func (s *Server) Start(ctx context.Context) error {
+	log.Infof("[grpc] server listening on: %s", s.lis.Addr().String())
 	s.health.Resume()
-	return s.Serve(s.listener)
+	return s.Serve(s.lis)
 }
 
-func (s *RpcServer) Stop(ctx context.Context) error {
+func (s *Server) Stop(ctx context.Context) error {
 	//设置服务的状态为not_serving，防止接收新的请求过来
 	s.health.Shutdown()
 	s.GracefulStop()
