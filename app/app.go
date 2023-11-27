@@ -30,7 +30,7 @@ type App struct {
 	cancel func()
 }
 
-func New(opts ...Option) *App {
+func NewApp(opts ...Option) *App {
 	o := options{
 		sigs:             []os.Signal{syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGINT},
 		registrarTimeout: 10 * time.Second,
