@@ -9,17 +9,10 @@ import (
 )
 
 type ErrCode struct {
-	//错误码
-	C int
-
-	//http的状态码
-	HTTP int
-
-	//扩展字段
-	Ext string
-
-	//引用文档
-	Ref string
+	C    int    //错误码
+	HTTP int    //http的状态码
+	Ext  string //扩展字段
+	Ref  string //引用文档
 }
 
 func (e ErrCode) HTTPStatus() int {

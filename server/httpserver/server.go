@@ -32,38 +32,20 @@ type JwtInfo struct {
 	MaxRefresh time.Duration
 }
 
-// wrapper for gin.Engine
+// Server wrapper for gin.Engine
 type Server struct {
 	*gin.Engine
-
-	//端口号， 默认值 8080
-	port int
-
-	//开发模式， 默认值 debug
-	mode string
-
-	//是否开启健康检查接口， 默认开启， 如果开启会自动添加 /health 接口
-	healthz bool
-
-	//是否开启pprof接口， 默认开启， 如果开启会自动添加 /debug/pprof 接口
-	enableProfiling bool
-
-	//是否开启metrics接口， 默认开启， 如果开启会自动添加 /metrics 接口
-	enableMetrics bool
-
-	//中间件
-	middlewares []string
-
-	//jwt配置信息
-	jwt *JwtInfo
-
-	//翻译器, 默认值 zh
-	transName string
-	trans     ut.Translator
-
-	server *http.Server
-
-	serviceName string
+	port            int      //端口号， 默认值 8080
+	mode            string   //开发模式， 默认值 debug
+	healthz         bool     //是否开启健康检查接口， 默认开启， 如果开启会自动添加 /health 接口
+	enableProfiling bool     //是否开启pprof接口， 默认开启， 如果开启会自动添加 /debug/pprof 接口
+	enableMetrics   bool     //是否开启metrics接口， 默认开启， 如果开启会自动添加 /metrics 接口
+	middlewares     []string //中间件
+	jwt             *JwtInfo //jwt配置信息
+	transName       string   //翻译器, 默认值 zh
+	trans           ut.Translator
+	server          *http.Server
+	serviceName     string
 }
 
 func NewServer(opts ...ServerOption) *Server {
@@ -74,13 +56,13 @@ func NewServer(opts ...ServerOption) *Server {
 		enableProfiling: true,
 		jwt: &JwtInfo{
 			"JWT",
-			"mwGDMGtSpdwXaiihF5WnEgRajSFpdZj8",
+			"GUeLB4rcX7LEus2rkeWuBPrZwNdR7pkV",
 			7 * 24 * time.Hour,
 			7 * 24 * time.Hour,
 		},
 		Engine:      gin.Default(),
 		transName:   "zh",
-		serviceName: "gmicro",
+		serviceName: "chaos",
 	}
 
 	for _, o := range opts {

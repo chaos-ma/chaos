@@ -24,19 +24,9 @@ type Watcher interface {
 }
 
 type ServiceInstance struct {
-	//注册到注册中心的服务id
-	ID string `json:"id"`
-
-	//服务名称
-	Name string `json:"name"`
-
-	//服务版本
-	Version string `json:"version"`
-
-	//服务元数据
-	Metadata map[string]string `json:"metadata"`
-
-	//http://127.0.0.1:8000
-	//grpc://127.0.0.1:9000
-	Endpoints []string `json:"endpoints"`
+	ID        string            `json:"id"`        //注册到注册中心的服务id
+	Name      string            `json:"name"`      //服务名称
+	Version   string            `json:"version"`   //服务版本
+	Metadata  map[string]string `json:"metadata"`  //服务元数据
+	Endpoints []string          `json:"endpoints"` //http://127.0.0.1:8000 ,grpc://127.0.0.1:9000
 }
