@@ -8,7 +8,6 @@ import (
 	"bytes"
 	"compress/gzip"
 	"context"
-	"errors"
 	"fmt"
 	"io"
 	"sync"
@@ -22,6 +21,7 @@ import (
 	"google.golang.org/protobuf/reflect/protoregistry"
 	dpb "google.golang.org/protobuf/types/descriptorpb"
 
+	"github.com/chaos-ma/chaos/errors"
 	"github.com/chaos-ma/chaos/log"
 )
 

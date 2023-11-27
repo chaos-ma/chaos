@@ -6,7 +6,6 @@ package serverinterceptors
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"runtime/debug"
 	"strings"
@@ -16,6 +15,8 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+
+	"github.com/chaos-ma/chaos/errors"
 )
 
 func UnaryTimeoutInterceptor(timeout time.Duration) grpc.UnaryServerInterceptor {

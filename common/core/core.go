@@ -18,7 +18,7 @@ type ErrResponse struct {
 
 	// Message contains the detail of this message.
 	// This message is suitable to be exposed to external
-	Message string `json:"msg"`
+	Msg string `json:"msg"`
 
 	Detail string `json:"detail"`
 
@@ -35,7 +35,7 @@ func WriteResponse(c *gin.Context, err error, data interface{}) {
 		coder := errors.ParseCoder(err)
 		c.JSON(coder.HTTPStatus(), ErrResponse{
 			Code:      coder.Code(),
-			Message:   coder.String(),
+			Msg:       coder.String(),
 			Detail:    errStr,
 			Reference: coder.Reference(),
 		})
