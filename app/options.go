@@ -6,6 +6,8 @@ package app
  */
 
 import (
+	"github.com/chaos-ma/chaos/server/httpserver"
+	"github.com/chaos-ma/chaos/server/rpcserver"
 	"net/url"
 	"os"
 	"time"
@@ -16,13 +18,45 @@ import (
 type Option func(o *options)
 
 type options struct {
-	id                string
-	name              string
-	endpoints         []*url.URL
-	signals           []os.Signal       //监听的信号量
-	registry          registry.Registry //接受自定义的注册方法
-	registerTimeout   time.Duration     //注册超时时间
-	unRegisterTimeout time.Duration     //注销超时时间
+	id        string
+	endpoints []*url.URL
+	name      string
+
+	sigs []os.Signal
+
+	//允许用户传入自己的实现
+	registrar        registry.Registrar
+	registrarTimeout time.Duration
+
+	//stop超时时间
+	stopTimeout time.Duration
+
+	restServer *httpserver.Server
+	rpcServer  *rpcserver.Server
+}
+
+func WithRegistrar(registrar registry.Registrar) Option {
+	return func(o *options) {
+		o.registrar = registrar
+	}
+}
+
+func WithEndpoints(endpoints []*url.URL) Option {
+	return func(o *options) {
+		o.endpoints = endpoints
+	}
+}
+
+func WithRPCServer(server *rpcserver.Server) Option {
+	return func(o *options) {
+		o.rpcServer = server
+	}
+}
+
+func WithRestServer(server *httpserver.Server) Option {
+	return func(o *options) {
+		o.restServer = server
+	}
 }
 
 func WithID(id string) Option {
@@ -37,20 +71,8 @@ func WithName(name string) Option {
 	}
 }
 
-func WithEndpoints(endpoints []*url.URL) Option {
+func WithSigs(sigs []os.Signal) Option {
 	return func(o *options) {
-		o.endpoints = endpoints
-	}
-}
-
-func WithSignals(signals []os.Signal) Option {
-	return func(o *options) {
-		o.signals = signals
-	}
-}
-
-func WithRegistry(registry registry.Registry) Option {
-	return func(o *options) {
-		o.registry = registry
+		o.sigs = sigs
 	}
 }

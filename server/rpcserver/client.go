@@ -40,49 +40,42 @@ func WithEnableTracing(enable bool) ClientOption {
 	}
 }
 
-// 设置地址
 func WithEndpoint(endpoint string) ClientOption {
 	return func(o *clientOptions) {
 		o.endpoint = endpoint
 	}
 }
 
-// 设置超时时间
 func WithClientTimeout(timeout time.Duration) ClientOption {
 	return func(o *clientOptions) {
 		o.timeout = timeout
 	}
 }
 
-// 设置服务发现
 func WithDiscovery(d registry.Discovery) ClientOption {
 	return func(o *clientOptions) {
 		o.discovery = d
 	}
 }
 
-// 设置拦截器
 func WithClientUnaryInterceptor(in ...grpc.UnaryClientInterceptor) ClientOption {
 	return func(o *clientOptions) {
 		o.unaryInts = in
 	}
 }
 
-// 设置stream拦截器
 func WithClientStreamInterceptor(in ...grpc.StreamClientInterceptor) ClientOption {
 	return func(o *clientOptions) {
 		o.streamInts = in
 	}
 }
 
-// 设置grpc的dial选项
 func WithClientOptions(opts ...grpc.DialOption) ClientOption {
 	return func(o *clientOptions) {
 		o.rpcOpts = opts
 	}
 }
 
-// 设置负载均衡器
 func WithBalancerName(name string) ClientOption {
 	return func(o *clientOptions) {
 		o.balancerName = name
@@ -108,7 +101,7 @@ func dial(ctx context.Context, insecure bool, opts ...ClientOption) (*grpc.Clien
 		o(&options)
 	}
 
-	//客户端默认拦截器
+	// 客户端默认拦截器
 	ints := []grpc.UnaryClientInterceptor{
 		clientinterceptors.TimeoutInterceptor(options.timeout),
 	}
@@ -120,7 +113,7 @@ func dial(ctx context.Context, insecure bool, opts ...ClientOption) (*grpc.Clien
 		ints = append(ints, clientinterceptors.PrometheusInterceptor())
 	}
 
-	var streamInts []grpc.StreamClientInterceptor
+	streamInts := []grpc.StreamClientInterceptor{}
 
 	if len(options.unaryInts) > 0 {
 		ints = append(ints, options.unaryInts...)
