@@ -6,7 +6,6 @@ package app
 
 import (
 	"context"
-	"golang.org/x/sync/errgroup"
 	"net/url"
 	"os"
 	"os/signal"
@@ -15,6 +14,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"golang.org/x/sync/errgroup"
 
 	"github.com/chaos-ma/chaos/log"
 	"github.com/chaos-ma/chaos/registry"

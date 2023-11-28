@@ -12,5 +12,12 @@ go install github.com/golang/protobuf/protoc-gen-go@latest
 3. 安装protoc-gen-go-grpc
 
 ```shell
-go install google.golang.org/grpc/cmd/protoc-gen-go-grpc
+go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 ```
+
+4. 安装stringer
+
+```shell
+go install golang.org/x/tools/cmd/stringer@latest
+```
+
