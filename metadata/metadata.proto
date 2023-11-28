@@ -1,14 +1,14 @@
 syntax = "proto3";
 
-package kratos.api;
+package chaos.api;
 
 import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
 
-option go_package = "github.com/go-kratos/kratos/v2/api/proto/kratos/api;metadata";
+option go_package = "github.com/chaos-ma/chaos/metadata;metadata";
 option java_multiple_files = true;
-option java_package = "com.github.kratos.api";
-option objc_class_prefix = "KratosAPI";
+option java_package = "com.github.chaos.api";
+option objc_class_prefix = "ChaosAPI";
 
 
 // Metadata is api definition metadata service.

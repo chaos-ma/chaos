@@ -3,7 +3,7 @@
 * 生成gin模板
 
 ```shell
-cd chaos/codegen
+cd chaos/cmd/chaos-codegen
 go build -o chaos-codegen.exe
 ```
 

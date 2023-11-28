@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-//go:generate protoc -I. --go_out=. --go-grpc_out=.  hello.proto
-
 package template;
 
 import "google/api/annotations.proto";

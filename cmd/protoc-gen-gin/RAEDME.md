@@ -3,7 +3,7 @@
 * 生成gin模板
 
 ```shell
-cd chaos/template
+cd chaos/cmd/protoc-gen-gin
 go build -o protoc-gen-gin.exe
 ```
 
@@ -14,4 +14,3 @@ go build -o protoc-gen-gin.exe
 ```shell
 protoc --proto_path=. --proto_path=../third_party --go_out=./test --go-grpc_out=./test --gin_out=./test test.proto
 ```
-

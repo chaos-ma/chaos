@@ -5,9 +5,10 @@ import (
 	"google.golang.org/protobuf/compiler/protogen"
 	"google.golang.org/protobuf/types/pluginpb"
 
-	"github.com/chaos-ma/chaos/template/generator"
+	"github.com/chaos-ma/chaos/cmd/protoc-gen-gin/generator"
 )
 
+//go:generate protoc --proto_path=. --proto_path=../third_party --go_out=./test --go-grpc_out=./test --gin_out=./test test.proto
 func main() {
 	flag.Parse()
 	var flags flag.FlagSet

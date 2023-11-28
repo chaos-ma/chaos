@@ -20,7 +20,7 @@ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 go install golang.org/x/tools/cmd/stringer@latest
 ```
 
-### 5. protobuf 生成gin模板
+### 5. protoc-gen-gin工具安装(protobuf 生成gin模板)
 
 * 5.1 build生成工具
 
@@ -42,8 +42,8 @@ protoc --proto_path=. --proto_path=../third_party --go_out=./test --go-grpc_out=
 * 6.1 build生成工具
 
 ```shell
-cd chaos/codegen
-go build -o codegen.exe
+cd chaos/cmd/chaos-codegen
+go build -o chaos-codegen.exe
 ```
 
-* 6.2 将codegen.exe拷贝至go_path的bin目录下
+* 6.2 chaos-codegen.exe拷贝至go_path的bin目录下
