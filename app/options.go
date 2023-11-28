@@ -6,13 +6,13 @@ package app
  */
 
 import (
-	"github.com/chaos-ma/chaos/server/httpserver"
-	"github.com/chaos-ma/chaos/server/rpcserver"
 	"net/url"
 	"os"
 	"time"
 
 	"github.com/chaos-ma/chaos/registry"
+	"github.com/chaos-ma/chaos/server/httpserver"
+	"github.com/chaos-ma/chaos/server/rpcserver"
 )
 
 type Option func(o *options)

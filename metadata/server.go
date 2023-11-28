@@ -8,7 +8,6 @@ import (
 	"bytes"
 	"compress/gzip"
 	"context"
-	"errors"
 	"fmt"
 	"io"
 	"sync"
@@ -22,11 +21,12 @@ import (
 	"google.golang.org/protobuf/reflect/protoregistry"
 	dpb "google.golang.org/protobuf/types/descriptorpb"
 
+	"github.com/chaos-ma/chaos/errors"
 	"github.com/chaos-ma/chaos/log"
 )
 
 //nolint:lll
-//go:generate protoc --proto_path=. --proto_path=../../third_party --go_out=paths=source_relative:. --go-grpc_out=paths=source_relative:. --go-http_out=paths=source_relative:. metadata.proto
+//go:generate protoc --proto_path=. --proto_path=../third_party --go_out=paths=source_relative:. --go-grpc_out=paths=source_relative:. --go-http_out=paths=source_relative:. metadata.proto
 
 // Server is api meta server
 type Server struct {

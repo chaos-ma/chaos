@@ -2,12 +2,12 @@ package auth
 
 import (
 	"fmt"
+	"github.com/chaos-ma/chaos/codegen/code"
 	"time"
 
 	"github.com/dgrijalva/jwt-go/v4"
 	"github.com/gin-gonic/gin"
 
-	"github.com/chaos-ma/chaos/code"
 	"github.com/chaos-ma/chaos/common/core"
 	"github.com/chaos-ma/chaos/errors"
 	"github.com/chaos-ma/chaos/server/httpserver/middlewares"

@@ -8,7 +8,6 @@ package discovery
 import (
 	"context"
 	"encoding/json"
-	"errors"
 	"net/url"
 	"strconv"
 	"time"
@@ -16,6 +15,7 @@ import (
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/resolver"
 
+	"github.com/chaos-ma/chaos/errors"
 	"github.com/chaos-ma/chaos/log"
 	"github.com/chaos-ma/chaos/registry"
 )

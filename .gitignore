@@ -69,4 +69,4 @@ _testmain.go
 template/test/*.go
 
 # 不忽略cmd
-!template/protoc-gen-gin.exe
+# !template/protoc-gen-gin.exe
