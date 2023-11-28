@@ -2,11 +2,11 @@ package auth
 
 import (
 	"encoding/base64"
+	"github.com/chaos-ma/chaos/codegen/code"
 	"strings"
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/chaos-ma/chaos/code"
 	"github.com/chaos-ma/chaos/common/core"
 	"github.com/chaos-ma/chaos/errors"
 	"github.com/chaos-ma/chaos/server/httpserver/middlewares"

@@ -4,7 +4,15 @@
 
 ```shell
 cd chaos/codegen
-go build -o codegen.exe
+go build -o chaos-codegen.exe
 ```
 
-* 将codegen.exe拷贝至go_path的bin目录下
+* 将chaos-codegen.exe拷贝至go_path的bin目录下
+
+*进入code目录执行
+```shell
+go generate
+```
+
+* //chaos-codegen -type=int
+* //chaos-codegen -type=int -doc -output ./error_code_generated.md

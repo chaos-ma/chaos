@@ -1,6 +1,6 @@
 package code
 
-//go:generate codegen -type=int -doc -output ./error_code_generated.md
+//go:generate chaos-codegen -type=int
 
 // Common: basic errors.
 // Code must start with 1xxxxx.
