@@ -17,7 +17,6 @@ import (
 	"google.golang.org/grpc/reflection"
 
 	"github.com/chaos-ma/chaos/log"
-	apimd "github.com/chaos-ma/chaos/metadata"
 	srvintc "github.com/chaos-ma/chaos/server/rpcserver/serverinterceptors"
 	"github.com/chaos-ma/chaos/utils/host"
 )
@@ -35,7 +34,6 @@ type Server struct {
 	timeout    time.Duration
 
 	health   *health.Server
-	metadata *apimd.Server
 	endpoint *url.URL
 
 	enableMetrics bool
@@ -89,9 +87,6 @@ func NewServer(opts ...ServerOption) *Server {
 
 	srv.Server = grpc.NewServer(grpcOpts...)
 
-	//注册metadata的Server
-	srv.metadata = apimd.NewServer(srv.Server)
-
 	//解析address
 	err := srv.listenAndEndpoint()
 	if err != nil {
@@ -100,7 +95,6 @@ func NewServer(opts ...ServerOption) *Server {
 
 	//注册health
 	grpc_health_v1.RegisterHealthServer(srv.Server, srv.health)
-	apimd.RegisterMetadataServer(srv.Server, srv.metadata)
 	reflection.Register(srv.Server)
 	//可以支持用户直接通过grpc的一个接口查看当前支持的所有的rpc服务
 

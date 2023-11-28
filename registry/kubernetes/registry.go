@@ -29,12 +29,12 @@ import (
 )
 
 // Defines the key name of specific fields
-// Kratos needs to cooperate with the following fields to run properly on Kubernetes:
-// kratos-service-id: define the ID of the service
-// kratos-service-app: define the name of the service
-// kratos-service-version: define the version of the service
-// kratos-service-metadata: define the metadata of the service
-// kratos-service-protocols: define the protocols of the service
+// chaos needs to cooperate with the following fields to run properly on Kubernetes:
+// chaos-service-id: define the ID of the service
+// chaos-service-app: define the name of the service
+// chaos-service-version: define the version of the service
+// chaos-service-metadata: define the metadata of the service
+// chaos-service-protocols: define the protocols of the service
 //
 // Example Deployment:
 /*
@@ -53,13 +53,13 @@ template:
   metadata:
     labels:
       app: nginx
-      kratos-service-id: "56991810-c77f-4a95-8190-393efa9c1a61"
-      kratos-service-app: "nginx"
-      kratos-service-version: "v3.5.0"
+      chaos-service-id: "56991810-c77f-4a95-8190-393efa9c1a61"
+      chaos-service-app: "nginx"
+      chaos-service-version: "v3.5.0"
     annotations:
-      kratos-service-protocols: |
+      chaos-service-protocols: |
         {"80": "http"}
-      kratos-service-metadata: |
+      chaos-service-metadata: |
         {"region": "sh", "zone": "sh001", "cluster": "pd"}
   spec:
     containers:
@@ -70,17 +70,17 @@ template:
 */
 const (
 	// LabelsKeyServiceID is used to define the ID of the service
-	LabelsKeyServiceID = "kratos-service-id"
+	LabelsKeyServiceID = "chaos-service-id"
 	// LabelsKeyServiceName is used to define the name of the service
-	LabelsKeyServiceName = "kratos-service-app"
+	LabelsKeyServiceName = "chaos-service-app"
 	// LabelsKeyServiceVersion is used to define the version of the service
-	LabelsKeyServiceVersion = "kratos-service-version"
+	LabelsKeyServiceVersion = "chaos-service-version"
 	// AnnotationsKeyMetadata is used to define the metadata of the service
-	AnnotationsKeyMetadata = "kratos-service-metadata"
+	AnnotationsKeyMetadata = "chaos-service-metadata"
 	// AnnotationsKeyProtocolMap is used to define the protocols of the service
-	// Through the value of this field, Kratos can obtain the application layer protocol corresponding to the port
+	// Through the value of this field, chaos can obtain the application layer protocol corresponding to the port
 	// Example value: {"80": "http", "8081": "grpc"}
-	AnnotationsKeyProtocolMap = "kratos-service-protocols"
+	AnnotationsKeyProtocolMap = "chaos-service-protocols"
 )
 
 // The Registry simply implements service discovery based on Kubernetes

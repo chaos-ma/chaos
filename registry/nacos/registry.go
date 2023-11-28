@@ -19,10 +19,10 @@ import (
 	"github.com/chaos-ma/chaos/registry"
 )
 
-var ErrServiceInstanceNameEmpty = errors.New("kratos/nacos: ServiceInstance.Name can not be empty")
+var ErrServiceInstanceNameEmpty = errors.New("chaos/nacos: ServiceInstance.Name can not be empty")
 
 var (
-	_ registry.Registry  = (*Registry)(nil)
+	_ registry.Registrar = (*Registry)(nil)
 	_ registry.Discovery = (*Registry)(nil)
 )
 

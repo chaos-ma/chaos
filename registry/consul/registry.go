@@ -17,7 +17,7 @@ import (
 )
 
 var (
-	_ registry.Registry  = &Registry{}
+	_ registry.Registrar = &Registry{}
 	_ registry.Discovery = &Registry{}
 )
 
