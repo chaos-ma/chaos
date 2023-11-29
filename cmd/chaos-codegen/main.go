@@ -243,7 +243,6 @@ func (g *Generator) generate(typeName string) {
 		log.Fatalf("no values defined for type %s", typeName)
 	}
 	// Generate code that will fail if the constants change value.
-	g.Printf("\t// init register error codes defines in this source code to `imooc/mxshop/pkg/errors`\n")
 	g.Printf("func init() {\n")
 	for _, v := range values {
 		code, description := v.ParseComment()
