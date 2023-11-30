@@ -5,8 +5,9 @@ package direct
  */
 
 import (
-	"google.golang.org/grpc/resolver"
 	"strings"
+
+	"google.golang.org/grpc/resolver"
 )
 
 func init() {
