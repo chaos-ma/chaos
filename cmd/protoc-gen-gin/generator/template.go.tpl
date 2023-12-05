@@ -6,7 +6,7 @@ type {{$.Name}}HttpServer struct{
 func Register{{ $.ServiceName }}HTTPServer(srv {{ $.ServiceName }}, r gin.IRouter) {
 	s := {{.Name}}HttpServer{
 		server: srv,
-		router:     r,
+		router: r,
 	}
 	s.RegisterService()
 }
@@ -16,7 +16,7 @@ func (s *{{$.Name}}HttpServer) {{ .HandlerName }} (c *gin.Context) {
 	var in {{.Request}}
 {{if eq .Method "GET" "DELETE" }}
 	if err := c.ShouldBindQuery(&in); err != nil {
-		s.resp.ParamsError(ctx, err)
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 {{else if eq .Method "POST" "PUT" }}
