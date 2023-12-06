@@ -345,8 +345,8 @@ github.com/mwitkow/go-conntrack v0.0.0-20161129095857-cc309e4a2223/go.mod h1:qRW
 github.com/mwitkow/go-conntrack v0.0.0-20190716064945-2f068394615f/go.mod h1:qRWi+5nqEBWmkhHvq77mSJWrCKwh8bxhgT7d/eI7P4U=
 github.com/nacos-group/nacos-sdk-go/v2 v2.2.4 h1:t3Eoz3ySvKrm7p2WMfWYciCF87UEdLac64CZKFlC0BA=
 github.com/nacos-group/nacos-sdk-go/v2 v2.2.4/go.mod h1:Q9qY/WK+kxTKK7cNoxMkdkKcD7BLBgTmwQ1jmThgGK8=
-github.com/novalagung/gubrak v1.0.0 h1:+iDvzUcSHUoa3bwP/ig40K2h9X+5cX2w5qcBb3izAwo=
-github.com/novalagung/gubrak v1.0.0/go.mod h1:lahTbjdK/OLI9Y4alRlf003XEwbiOj7ERkmDHFFbzLk=
+github.com/novalagung/gubrak/v2 v2.0.1 h1:OmabeSZsnf8Yd4FSZfm3F6VG2XoEsQBpktwtkjiCLdg=
+github.com/novalagung/gubrak/v2 v2.0.1/go.mod h1:zilliNLzP2RSdZ67Sz7NdqI4bg3j5zUTFR34tuXopA0=
 github.com/onsi/ginkgo/v2 v2.11.0 h1:WgqUCUt/lT6yXoQ8Wef0fsNn5cAuMK7+KT9UFRz2tcU=
 github.com/onsi/gomega v1.27.10 h1:naR28SdDFlqrG6kScpT8VWpu1xWY5nJRCF3XaYyBjhI=
 github.com/openzipkin/zipkin-go v0.4.2 h1:zjqfqHjUpPmB3c1GlCvvgsM1G4LkvqQbBDueDOCg/jA=
