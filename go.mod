@@ -14,7 +14,7 @@ require (
 	github.com/hashicorp/consul/api v1.26.1
 	github.com/json-iterator/go v1.1.12
 	github.com/nacos-group/nacos-sdk-go/v2 v2.2.4
-	github.com/novalagung/gubrak v1.0.0
+	github.com/novalagung/gubrak/v2 v2.0.1
 	github.com/penglongli/gin-metrics v0.1.10
 	github.com/prometheus/client_golang v1.12.2
 	github.com/uptrace/opentelemetry-go-extra/otelutil v0.2.3
